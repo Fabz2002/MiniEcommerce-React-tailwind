@@ -8,7 +8,7 @@ import {
 	RiCloseLine,
 } from 'react-icons/ri';
 import SideBar from './components/shared/Sidebar';
-import Main from './components/shared/Main';
+import MainSection from './components/shared/MainSection';
 function App() {
 	const [showMenu, setShowMenu] = useState(false);
 	// const [showOrder, setShowOrder] = useState(false);
@@ -38,7 +38,7 @@ function App() {
 					{showMenu ? <RiCloseLine /> : <RiMenuFill />}
 				</button>
 			</nav>
-			<Main />
+			<MainSection />
 		</div>
 	);
 }
