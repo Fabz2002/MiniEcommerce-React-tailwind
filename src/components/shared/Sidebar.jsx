@@ -7,8 +7,10 @@ import {
 	RiSettings3Line,
 	RiLogoutCircleRLine,
 } from 'react-icons/ri';
-
-function SideBar({ showMenu }) {
+import { useContext } from 'react';
+import { ProductsContext } from '../../context/productsContext';
+function SideBar() {
+	const { showMenu } = useContext(ProductsContext);
 	return (
 		<div
 			className={`bg-[#20262E] fixed  lg:left-0 top-0 w-28 h-full flex flex-col justify-between py-5 rounded-tr-lg rounded-br-lg z-50 -left-full transition-all ${

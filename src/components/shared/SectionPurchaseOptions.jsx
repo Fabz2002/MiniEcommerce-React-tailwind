@@ -3,7 +3,7 @@ import ContentMain from './ContentMain';
 
 function SectionPurchaseOptions() {
 	return (
-		<section className='lg:col-span-6 md:p-8'>
+		<section className=' md:p-8 p-4'>
 			<Header />
 			<ContentMain />
 		</section>

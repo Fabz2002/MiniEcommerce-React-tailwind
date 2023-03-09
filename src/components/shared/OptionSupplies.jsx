@@ -7,16 +7,16 @@ function OptionSupplies() {
 			>
 				Pizza
 			</a>
-			<a href='#' className=' py-2 pr-4  '>
+			<a href='#' className=''>
 				Pasta
 			</a>
-			<a href='#' className=' py-2 pr-4 '>
+			<a href='#' className=''>
 				Vegan
 			</a>
-			<a href='#' className=' py-2 pr-4 '>
+			<a href='#' className=''>
 				Niños
 			</a>
-			<a href='#' className=' py-2 pr-4 '>
+			<a href='#' className=''>
 				Bebidas
 			</a>
 		</nav>

@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {
 	RiMenuFill,
 	RiUser3Line,
@@ -9,17 +9,13 @@ import {
 } from 'react-icons/ri';
 import SideBar from './components/shared/Sidebar';
 import MainSection from './components/shared/MainSection';
+import { ProductsContext } from './context/productsContext';
+import ShoppingCart from './components/shared/ShoppingCart';
 function App() {
-	const [showMenu, setShowMenu] = useState(false);
-	// const [showOrder, setShowOrder] = useState(false);
-
-	const toggleMenu = () => {
-		setShowMenu(!showMenu);
-	};
-
+	const { toggleOrders, toggleMenu, showMenu } = useContext(ProductsContext);
 	return (
 		<div className='bg-[#959ea7] w-full  min-h-screen'>
-			<SideBar showMenu={showMenu} />
+			<SideBar />
 			{/* Menu movil */}
 			<nav
 				className='bg-[#20262E] lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl
@@ -31,14 +27,15 @@ function App() {
 				<button className='p-2'>
 					<RiAddFill />
 				</button>
-				<butto className='p-2'>
-					<RiPieChartLine />
-				</butto>
+				<button className='p-2'>
+					<RiPieChartLine onClick={toggleOrders} />
+				</button>
 				<button onClick={toggleMenu} className='text-white p-2'>
 					{showMenu ? <RiCloseLine /> : <RiMenuFill />}
 				</button>
 			</nav>
 			<MainSection />
+			<ShoppingCart />
 		</div>
 	);
 }
