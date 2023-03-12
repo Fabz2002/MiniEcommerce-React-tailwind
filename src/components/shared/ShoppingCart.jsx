@@ -4,7 +4,7 @@ import CategoriesShoppingCart from './CategoriesShoppingCart';
 import SubmitPayment from './SubmitPayment';
 import CardProductOrdersItem from './CardProductOrdersItem';
 import { useContext } from 'react';
-import { ProductsContext } from '../../context/productsContext';
+import { ProductsContext } from '../../context/ProductsContext';
 function Orders({ orderNumber = 1 }) {
 	const { showOrder, setShowOrder } = useContext(ProductsContext);
 	return (

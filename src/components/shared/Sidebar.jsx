@@ -8,7 +8,7 @@ import {
 	RiLogoutCircleRLine,
 } from 'react-icons/ri';
 import { useContext } from 'react';
-import { ProductsContext } from '../../context/productsContext';
+import { ProductsContext } from '../../context/ProductsContext';
 function SideBar() {
 	const { showMenu } = useContext(ProductsContext);
 	return (

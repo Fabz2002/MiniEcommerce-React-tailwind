@@ -9,7 +9,7 @@ import {
 } from 'react-icons/ri';
 import SideBar from './components/shared/Sidebar';
 import MainSection from './components/shared/MainSection';
-import { ProductsContext } from './context/productsContext';
+import { ProductsContext } from './context/ProductsContext';
 import ShoppingCart from './components/shared/ShoppingCart';
 function App() {
 	const { toggleOrders, toggleMenu, showMenu } = useContext(ProductsContext);
