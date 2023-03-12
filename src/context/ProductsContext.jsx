@@ -8,6 +8,10 @@ export function ProductsContextProvider(props) {
 	const [showOrder, setShowOrder] = useState(false);
 	const [categories, setCategories] = useState([]);
 	const [supplies, setSupplies] = useState([]);
+	const [allProductsCart, setAllProductsCart] = useState([]);
+	const [total, setTotal] = useState(0);
+	const [countProducts, setCountProducts] = useState(0);
+
 	const toggleMenu = () => {
 		setShowMenu(!showMenu);
 		setShowOrder(false);
@@ -41,6 +45,12 @@ export function ProductsContextProvider(props) {
 				categories,
 				setCategories,
 				supplies,
+				allProductsCart,
+				setAllProductsCart,
+				total,
+				setTotal,
+				countProducts,
+				setCountProducts,
 			}}
 		>
 			{props.children}
