@@ -30,7 +30,7 @@ function App() {
 				<button className='p-2'>
 					<RiPieChartLine onClick={toggleOrders} />
 				</button>
-				<button onClick={toggleMenu} className='text-white p-2'>
+				<button onClick={toggleMenu} className='text-white p-2 '>
 					{showMenu ? <RiCloseLine /> : <RiMenuFill />}
 				</button>
 			</nav>

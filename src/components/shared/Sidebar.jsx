@@ -21,9 +21,9 @@ function SideBar() {
 				<ul className='pl-4'>
 					<li>
 						<h1 className='text-sm text-gray-300 uppercase font-bold text-center my-4'>
-							Pizza
+							Vital
 							<span className='text-sm text-[#FFC93C] uppercase font-bold text-center mx-1'>
-								Locas
+								Clofz
 							</span>
 						</h1>
 					</li>

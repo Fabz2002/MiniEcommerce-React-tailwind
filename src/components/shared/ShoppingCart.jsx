@@ -18,7 +18,6 @@ function Orders({ orderNumber = 1 }) {
 					className='lg:hidden absolute left-4 top-4 p-3 box-content text-white bg-[#959ea7] rounded-full text-xl '
 					onClick={() => {
 						setShowOrder(false);
-						console.log('showOrder');
 					}}
 				/>
 				<h1 className='text-2xl my-4'>Orders #{orderNumber}</h1>
