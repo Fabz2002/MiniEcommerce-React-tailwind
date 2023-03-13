@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext } from 'react';
 import GetCategories from '../services/GetCategories';
 import GetSupplies from '../services/GetSupplies';
+import GetSuppliesFilter from '../services/GetSuppliesFilter';
 export const ProductsContext = createContext();
 
 export function ProductsContextProvider(props) {
@@ -11,7 +12,8 @@ export function ProductsContextProvider(props) {
 	const [allProductsCart, setAllProductsCart] = useState([]);
 	const [total, setTotal] = useState(0);
 	const [countProducts, setCountProducts] = useState(0);
-
+	const [showFilterProducts, setShowFilterProducts] = useState(false);
+	const [categoryFiltered, setCategoryFiltered] = useState('');
 	const toggleMenu = () => {
 		setShowMenu(!showMenu);
 		setShowOrder(false);
@@ -24,6 +26,11 @@ export function ProductsContextProvider(props) {
 		fetchSupplies();
 		fetchCategories();
 	}, []);
+	useEffect(() => {
+		if (showFilterProducts) {
+			fetchFilterProducts(categoryFiltered);
+		}
+	}, [categoryFiltered]);
 	async function fetchCategories() {
 		const categoris = await GetCategories();
 		setCategories(categoris);
@@ -31,6 +38,12 @@ export function ProductsContextProvider(props) {
 	async function fetchSupplies() {
 		const supplies = await GetSupplies();
 		setSupplies(supplies);
+	}
+	async function fetchFilterProducts() {
+		const productsFiltered = await GetSuppliesFilter({
+			KindOfCategory: categoryFiltered,
+		});
+		setSupplies(productsFiltered);
 	}
 	function DeleteProduct(product) {
 		if (product.quantity === 1) {
@@ -80,6 +93,9 @@ export function ProductsContextProvider(props) {
 				setCountProducts,
 				DeleteProduct,
 				OnAddProduct,
+				showFilterProducts,
+				setShowFilterProducts,
+				setCategoryFiltered,
 			}}
 		>
 			{props.children}
