@@ -6,7 +6,7 @@ async function GetSupplies() {
 		const supplies = response.map(data => {
 			const { id, price, title, image, rating } = data;
 			const { count } = rating;
-			return { id, price, title, image, count };
+			return { id, price, title, image, count, quantity: 0 };
 		});
 		return supplies;
 	}

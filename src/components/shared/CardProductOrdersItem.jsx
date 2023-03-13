@@ -1,12 +1,16 @@
 import { RiDeleteBin5Line } from 'react-icons/ri';
-
+import { useContext } from 'react';
+import { ProductsContext } from '../../context/ProductsContext';
 function CardProductOrdersItem({
 	image,
 	titleProduct,
 	itemPrice,
 	cant,
 	precioItems,
+	product,
 }) {
+	const { DeleteProduct } = useContext(ProductsContext);
+
 	return (
 		<div className='bg-[#959ea7] text-white p-4 rounded-xl mb-6'>
 			<div className='grid grid-cols-6 mb-4'>
@@ -39,7 +43,10 @@ function CardProductOrdersItem({
 					/>
 				</form>
 				<div>
-					<button className='border border-[#FFC93C] p-2 rounded-lg'>
+					<button
+						className='border border-[#FFC93C] p-2 rounded-lg'
+						onClick={() => DeleteProduct(product)}
+					>
 						<RiDeleteBin5Line className='text-[#FFC93C]' />
 					</button>
 				</div>

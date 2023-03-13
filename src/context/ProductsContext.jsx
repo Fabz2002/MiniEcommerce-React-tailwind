@@ -32,7 +32,34 @@ export function ProductsContextProvider(props) {
 		const supplies = await GetSupplies();
 		setSupplies(supplies);
 	}
+	function DeleteProduct(product) {
+		if (product.quantity === 1) {
+			product.quantity -= 1;
+			setAllProductsCart(prevItems =>
+				prevItems.filter(t => t.id !== product.id)
+			);
+			setCountProducts(countProducts - 1);
+		}
+		if (product.quantity > 1) {
+			product.quantity -= 1;
+			setCountProducts(countProducts - 1);
+		}
+	}
+	function OnAddProduct(product) {
+		if (allProductsCart.find(item => item.id === product.id)) {
+			const products = allProductsCart.map(item =>
+				item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+			);
+			setCountProducts(countProducts + 1);
+			return setAllProductsCart(products);
+		} else {
+			product.quantity = 0;
+			product.quantity += 1;
+			setCountProducts(countProducts + 1);
+		}
 
+		setAllProductsCart([...allProductsCart, product]);
+	}
 	return (
 		<ProductsContext.Provider
 			value={{
@@ -51,6 +78,8 @@ export function ProductsContextProvider(props) {
 				setTotal,
 				countProducts,
 				setCountProducts,
+				DeleteProduct,
+				OnAddProduct,
 			}}
 		>
 			{props.children}

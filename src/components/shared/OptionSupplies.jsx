@@ -7,7 +7,7 @@ function OptionSupplies() {
 		<nav className='text-white grid grid-cols-4 items-center border-b mb-6 gap-4'>
 			{categories.map((cate, index) => {
 				return (
-					<a href='#' key={index} className='uppercase text-xs lg:text-lg'>
+					<a href='#' key={index} className='uppercase text-xs md:text-lg'>
 						{cate}
 					</a>
 				);

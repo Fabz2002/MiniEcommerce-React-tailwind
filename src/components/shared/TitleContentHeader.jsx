@@ -3,13 +3,14 @@ function TitleContentHeader({ title = 'Escoge' }) {
 	return (
 		<div className='flex items-center justify-between mb-8'>
 			<h2 className='text-xl text-gray-200 '>{title}</h2>
-			<button
-				className='bg-[#20262E] flex items-center gap-4 text-gray-200 rounded-lg py-2 px-4 
+			<select
+				className='bg-[#20262E] items-center  text-gray-200 rounded-lg py-2 px-2 outline-none
 
                 '
 			>
-				<RiArrowDownSFill /> Mayor Precio
-			</button>
+				<option value='rigatoni'>Mayor Precio</option>
+				<option value='dave'>Menor Precio</option>
+			</select>
 		</div>
 	);
 }

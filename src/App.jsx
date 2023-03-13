@@ -6,13 +6,15 @@ import {
 	RiAddFill,
 	RiPieChartLine,
 	RiCloseLine,
+	RiShoppingBagLine,
 } from 'react-icons/ri';
 import SideBar from './components/shared/Sidebar';
 import MainSection from './components/shared/MainSection';
 import { ProductsContext } from './context/ProductsContext';
 import ShoppingCart from './components/shared/ShoppingCart';
 function App() {
-	const { toggleOrders, toggleMenu, showMenu } = useContext(ProductsContext);
+	const { toggleOrders, toggleMenu, showMenu, countProducts } =
+		useContext(ProductsContext);
 	return (
 		<div className='bg-[#959ea7] w-full  min-h-screen'>
 			<SideBar />
@@ -27,8 +29,11 @@ function App() {
 				<button className='p-2'>
 					<RiAddFill />
 				</button>
-				<button className='p-2'>
-					<RiPieChartLine onClick={toggleOrders} />
+				<button className='p-2 relative'>
+					<RiShoppingBagLine className='text-3xl' onClick={toggleOrders} />
+					<span className='bg-[#FFC93C] absolute rounded-full px-2 py-[2px] text-sm text-slate-600 -right-2 -mt-4'>
+						{countProducts}
+					</span>
 				</button>
 				<button onClick={toggleMenu} className='text-white p-2 '>
 					{showMenu ? <RiCloseLine /> : <RiMenuFill />}

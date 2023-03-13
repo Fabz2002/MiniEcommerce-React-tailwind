@@ -2,10 +2,10 @@ import { RiCloseLine, RiShoppingBagLine } from 'react-icons/ri';
 import CategoriesShoppingCart from './CategoriesShoppingCart';
 import SubmitPayment from './SubmitPayment';
 import CardProductOrdersItem from './CardProductOrdersItem';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ProductsContext } from '../../context/ProductsContext';
 function Orders() {
-	const { showOrder, setShowOrder, allProductsCart } =
+	const { showOrder, setShowOrder, allProductsCart, countProducts } =
 		useContext(ProductsContext);
 	return (
 		<section
@@ -25,7 +25,7 @@ function Orders() {
 					<div className='relative'>
 						<RiShoppingBagLine className='text-3xl' />
 						<span className='bg-[#FFC93C] absolute rounded-full px-2 py-[2px] text-sm text-slate-600 -right-2 -mt-4'>
-							0
+							{countProducts}
 						</span>
 					</div>
 				</h1>
@@ -42,8 +42,9 @@ function Orders() {
 										image={product.image}
 										titleProduct={`${product.title.slice(0, 8)}...`}
 										itemPrice={product.price}
-										cant='0'
+										cant={product.quantity}
 										precioItems={product.price * 1}
+										product={product}
 									/>
 								);
 							})}

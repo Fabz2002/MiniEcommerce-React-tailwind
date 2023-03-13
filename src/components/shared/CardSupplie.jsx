@@ -2,10 +2,8 @@ import { RiShoppingCart2Line } from 'react-icons/ri';
 import { useContext } from 'react';
 import { ProductsContext } from '../../context/ProductsContext';
 function CardSupplie({ image, title, available = '', price, supplie }) {
-	const { setAllProductsCart, allProductsCart } = useContext(ProductsContext);
-	const onAddProduct = product => {
-		setAllProductsCart([...allProductsCart, product]);
-	};
+	const { OnAddProduct } = useContext(ProductsContext);
+
 	return (
 		<div className='bg-[#20262E] p-8 rounded-xl flex flex-col gap-4 items-center text-center text-gray-300 '>
 			<img
@@ -24,7 +22,7 @@ function CardSupplie({ image, title, available = '', price, supplie }) {
 			<button
 				type='button'
 				className=' bg-[#FFC93C] bottom-0   rounded-lg  py-2 px-4 mt-2 text-gray-700 flex items-center gap-2 hover:scale-105 hover:text-white'
-				onClick={() => onAddProduct(supplie)}
+				onClick={() => OnAddProduct(supplie)}
 			>
 				Add to Cart
 				<RiShoppingCart2Line />
