@@ -13,7 +13,7 @@ function CardProductOrdersItem({
 
 	return (
 		<div className='bg-[#959ea7] text-white p-4 rounded-xl mb-6'>
-			<div className='grid grid-cols-6 mb-4'>
+			<div className='grid grid-cols-6  mb-4'>
 				{/* description product */}
 				<div className='col-span-4 flex items-center gap-3'>
 					<img src={image} className='w-10 h-10 object-cover' />
@@ -34,11 +34,12 @@ function CardProductOrdersItem({
 				</div>
 			</div>
 			{/* note */}
-			<div className='grid grid-cols-6 items-center '>
+			{/* md:grid md:grid-cols-6 md:gap-5  'md:col-span-5' */}
+			<div className=' grid grid-cols-6  gap-2  items-center '>
 				<form className='col-span-5'>
 					<input
 						type='text'
-						className='bg-[#20262E] py-1 px-4 rounded-lg outline-none'
+						className='bg-[#20262E] py-1 px-4 rounded-lg outline-none w-full'
 						placeholder='Nota de la Orden...'
 					/>
 				</form>
