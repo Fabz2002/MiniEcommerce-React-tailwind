@@ -2,11 +2,16 @@ import { RiCloseLine, RiShoppingBagLine } from 'react-icons/ri';
 import CategoriesShoppingCart from './CategoriesShoppingCart';
 import SubmitPayment from './SubmitPayment';
 import CardProductOrdersItem from './CardProductOrdersItem';
-import { useContext, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { ProductsContext } from '../../context/ProductsContext';
 function Orders() {
-	const { showOrder, setShowOrder, allProductsCart, countProducts } =
-		useContext(ProductsContext);
+	const {
+		showOrder,
+		setShowOrder,
+		allProductsCart,
+		countProducts,
+		setTotalItemPrice,
+	} = useContext(ProductsContext);
 	return (
 		<section
 			className={`fixed  top-0 bg-[#20262E] w-full lg:w-96 lg:right-0 h-full lg:rounded-r-2xl ${
@@ -43,7 +48,7 @@ function Orders() {
 										titleProduct={`${product.title.slice(0, 8)}...`}
 										itemPrice={product.price}
 										cant={product.quantity}
-										precioItems={product.price * 1}
+										precioItems={product.price * product.quantity}
 										product={product}
 									/>
 								);
@@ -52,7 +57,7 @@ function Orders() {
 					</div>
 				) : (
 					<div className='flex items-center justify-center h-5/6 '>
-						<p className='text-2xl'>The cart is empty</p>
+						<p className='text-2xl'>The cart is empty{setTotalItemPrice(0)}</p>
 					</div>
 				)}
 

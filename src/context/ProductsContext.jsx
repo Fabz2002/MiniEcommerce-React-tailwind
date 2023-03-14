@@ -2,10 +2,12 @@ import { useState, useEffect, createContext } from 'react';
 import GetCategories from '../services/GetCategories';
 import GetSupplies from '../services/GetSupplies';
 import GetSuppliesFilter from '../services/GetSuppliesFilter';
+import GetSuppliesSearched from '../services/GetSuppliesSearched';
 export const ProductsContext = createContext();
 
 export function ProductsContextProvider(props) {
 	const [showMenu, setShowMenu] = useState(false);
+	const [totalItemPrice, setTotalItemPrice] = useState(0);
 	const [showOrder, setShowOrder] = useState(false);
 	const [categories, setCategories] = useState([]);
 	const [supplies, setSupplies] = useState([]);
@@ -14,6 +16,8 @@ export function ProductsContextProvider(props) {
 	const [countProducts, setCountProducts] = useState(0);
 	const [showFilterProducts, setShowFilterProducts] = useState(false);
 	const [categoryFiltered, setCategoryFiltered] = useState('');
+	const [kword, setKword] = useState('');
+	const [searching, setSearching] = useState(false);
 	const toggleMenu = () => {
 		setShowMenu(!showMenu);
 		setShowOrder(false);
@@ -22,15 +26,25 @@ export function ProductsContextProvider(props) {
 		setShowOrder(!showOrder);
 		setShowMenu(false);
 	};
+
 	useEffect(() => {
-		fetchSupplies();
-		fetchCategories();
-	}, []);
-	useEffect(() => {
+		if (!searching && !showFilterProducts) {
+			fetchCategories();
+			fetchSupplies();
+		}
+		if (!showFilterProducts) {
+			if (searching && kword !== '') {
+				fetchSearchProducts();
+			}
+			if (kword === '') {
+				setSearching(false);
+			}
+		}
 		if (showFilterProducts) {
 			fetchFilterProducts(categoryFiltered);
+			setShowFilterProducts(false);
 		}
-	}, [categoryFiltered]);
+	}, [kword, categoryFiltered]);
 	async function fetchCategories() {
 		const categoris = await GetCategories();
 		setCategories(categoris);
@@ -43,10 +57,17 @@ export function ProductsContextProvider(props) {
 		const productsFiltered = await GetSuppliesFilter({
 			KindOfCategory: categoryFiltered,
 		});
+		console.log(productsFiltered);
 		setSupplies(productsFiltered);
+	}
+	async function fetchSearchProducts() {
+		const productSearched = await GetSuppliesSearched({ keyword: kword });
+		console.log(productSearched);
+		setSupplies(productSearched);
 	}
 	function DeleteProduct(product) {
 		if (product.quantity === 1) {
+			setTotalItemPrice(totalItemPrice - product.price * product.quantity);
 			product.quantity -= 1;
 			setAllProductsCart(prevItems =>
 				prevItems.filter(t => t.id !== product.id)
@@ -55,6 +76,8 @@ export function ProductsContextProvider(props) {
 		}
 		if (product.quantity > 1) {
 			product.quantity -= 1;
+			console.log(totalItemPrice);
+			setTotalItemPrice(totalItemPrice - product.price);
 			setCountProducts(countProducts - 1);
 		}
 	}
@@ -64,10 +87,12 @@ export function ProductsContextProvider(props) {
 				item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
 			);
 			setCountProducts(countProducts + 1);
+			setTotalItemPrice(product.price * product.quantity + totalItemPrice);
 			return setAllProductsCart(products);
 		} else {
 			product.quantity = 0;
 			product.quantity += 1;
+			setTotalItemPrice(product.price * product.quantity + totalItemPrice);
 			setCountProducts(countProducts + 1);
 		}
 
@@ -96,6 +121,12 @@ export function ProductsContextProvider(props) {
 				showFilterProducts,
 				setShowFilterProducts,
 				setCategoryFiltered,
+				totalItemPrice,
+				setTotalItemPrice,
+				kword,
+				setKword,
+				setSearching,
+				searching,
 			}}
 		>
 			{props.children}
