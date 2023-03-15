@@ -1,4 +1,4 @@
-async function GetSupplies() {
+async function GetSuppliesByLowPrices() {
 	const api = 'https://fakestoreapi.com/products';
 	const res = await fetch(api);
 	const response = await res.json();
@@ -8,9 +8,9 @@ async function GetSupplies() {
 			const { count } = rating;
 			return { id, price, title, image, count, quantity: 0 };
 		});
-
-		return supplies.sort((a, b) => b.price - a.price);
+		const productByLowPrices = supplies.sort((a, b) => a.price - b.price);
+		return productByLowPrices;
 	}
 }
 
-export default GetSupplies;
+export default GetSuppliesByLowPrices;

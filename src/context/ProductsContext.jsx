@@ -3,6 +3,7 @@ import GetCategories from '../services/GetCategories';
 import GetSupplies from '../services/GetSupplies';
 import GetSuppliesFilter from '../services/GetSuppliesFilter';
 import GetSuppliesSearched from '../services/GetSuppliesSearched';
+import GetSuppliesByLowPrices from '../services/GetSuppliesByLowPrices';
 export const ProductsContext = createContext();
 
 export function ProductsContextProvider(props) {
@@ -18,6 +19,7 @@ export function ProductsContextProvider(props) {
 	const [categoryFiltered, setCategoryFiltered] = useState('');
 	const [kword, setKword] = useState('');
 	const [searching, setSearching] = useState(false);
+	const [showLowPrices, setShowLowPrices] = useState(false);
 	const toggleMenu = () => {
 		setShowMenu(!showMenu);
 		setShowOrder(false);
@@ -28,7 +30,7 @@ export function ProductsContextProvider(props) {
 	};
 
 	useEffect(() => {
-		if (!searching && !showFilterProducts) {
+		if (!searching && !showFilterProducts && !showLowPrices) {
 			fetchCategories();
 			fetchSupplies();
 		}
@@ -44,7 +46,10 @@ export function ProductsContextProvider(props) {
 			fetchFilterProducts(categoryFiltered);
 			setShowFilterProducts(false);
 		}
-	}, [kword, categoryFiltered]);
+		if (showLowPrices) {
+			fetchSuppliesByLowPrices();
+		}
+	}, [kword, categoryFiltered, showLowPrices]);
 	async function fetchCategories() {
 		const categoris = await GetCategories();
 		setCategories(categoris);
@@ -57,13 +62,15 @@ export function ProductsContextProvider(props) {
 		const productsFiltered = await GetSuppliesFilter({
 			KindOfCategory: categoryFiltered,
 		});
-		console.log(productsFiltered);
 		setSupplies(productsFiltered);
 	}
 	async function fetchSearchProducts() {
 		const productSearched = await GetSuppliesSearched({ keyword: kword });
-		console.log(productSearched);
 		setSupplies(productSearched);
+	}
+	async function fetchSuppliesByLowPrices() {
+		const productByLowPrices = await GetSuppliesByLowPrices();
+		setSupplies(productByLowPrices);
 	}
 	function DeleteProduct(product) {
 		if (product.quantity === 1) {
@@ -127,6 +134,8 @@ export function ProductsContextProvider(props) {
 				setKword,
 				setSearching,
 				searching,
+				showLowPrices,
+				setShowLowPrices,
 			}}
 		>
 			{props.children}
