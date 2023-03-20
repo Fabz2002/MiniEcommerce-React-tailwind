@@ -5,6 +5,7 @@ function CardProductOrdersItem({
 	image,
 	titleProduct,
 	itemPrice,
+	cant,
 	precioItems,
 	product,
 }) {
@@ -22,7 +23,11 @@ function CardProductOrdersItem({
 					</div>
 				</div>
 				{/* qty */}
-
+				<div className='text-center '>
+					<span className=' bg-[#20262E] px-3 py-2 rounded-md text-sm'>
+						{cant}
+					</span>
+				</div>
 				{/* Precio */}
 				<div className=''>
 					<span className='text-sm'>S/{precioItems}</span>
