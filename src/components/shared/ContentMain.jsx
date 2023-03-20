@@ -19,7 +19,6 @@ function ContentMain() {
 							key={supplie.id}
 							image={supplie.image}
 							title={supplie.title}
-							available={supplie.count}
 							price={supplie.price}
 							supplie={supplie}
 						/>

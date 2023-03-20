@@ -1,4 +1,4 @@
-export const supplies = {
+const supplies = {
 	Pizza: [
 		{
 			id: 1,
@@ -67,3 +67,5 @@ export const supplies = {
 		},
 	],
 };
+
+export default supplies;

@@ -1,16 +1,13 @@
 async function GetCategories() {
-	const api = 'https://fakestoreapi.com/products';
+	const api = 'https://api.escuelajs.co/api/v1/categories';
 	const res = await fetch(api);
 	const response = await res.json();
 	if (Array.isArray(response)) {
-		const uniqueCategories = response.reduce((acc, cur) => {
-			const { category } = cur;
-			if (!acc.includes(category)) {
-				acc.push(category);
-			}
-			return acc;
-		}, []);
-		return uniqueCategories;
+		const categories = response.map(category => {
+			const { name, id } = category;
+			return { name, id };
+		});
+		return categories.slice(0, 4);
 	}
 }
 

@@ -1,16 +1,19 @@
 async function GetSuppliesFilter({ KindOfCategory }) {
-	const api = 'https://fakestoreapi.com/products';
+	const api = 'https://api.escuelajs.co/api/v1/products';
 	const res = await fetch(api);
 	const response = await res.json();
 	if (Array.isArray(response)) {
 		const supplies = response.map(data => {
-			const { id, price, title, image, rating, category } = data;
-			const { count } = rating;
-			return { id, price, title, image, count, quantity: 0, category };
+			const { id, price, title, images, category } = data;
+			const image = images[0];
+			const { name } = category;
+			return { id, price, title, image, quantity: 0, name };
 		});
+		console.log(KindOfCategory, 'df');
 		const category = supplies.filter(
-			supplie => supplie.category === KindOfCategory
+			supplie => supplie.name === KindOfCategory
 		);
+		console.log(category);
 		return category;
 	}
 }

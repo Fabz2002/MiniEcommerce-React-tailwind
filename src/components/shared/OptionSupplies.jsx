@@ -8,22 +8,22 @@ function OptionSupplies() {
 		setCategoryFiltered,
 		setSearching,
 	} = useContext(ProductsContext);
-	function handleFilter(index) {
-		setCategoryFiltered(categories[index]);
+	function handleFilter(id) {
+		setCategoryFiltered(categories[id].name);
 		setShowFilterProducts(true);
 		setSearching(false);
 	}
 	return (
 		<nav className='  text-white grid grid-cols-4 items-center justify-items-center  border-b mb-6 gap-4'>
-			{categories.map((cate, index) => {
+			{categories.map(cate => {
 				return (
 					<a
 						href='#'
-						key={index}
+						key={cate.id}
 						className=' uppercase text-center text-sm md:text-base lg:text-base xl:w-auto xl:text-lg px-2 focus:text-[#FFC93C] '
-						onClick={() => handleFilter(index)}
+						onClick={() => handleFilter(cate.id)}
 					>
-						{cate}
+						{cate.name}
 					</a>
 				);
 			})}

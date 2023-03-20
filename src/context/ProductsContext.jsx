@@ -62,6 +62,7 @@ export function ProductsContextProvider(props) {
 		const productsFiltered = await GetSuppliesFilter({
 			KindOfCategory: categoryFiltered,
 		});
+		console.log(productsFiltered);
 		setSupplies(productsFiltered);
 	}
 	async function fetchSearchProducts() {

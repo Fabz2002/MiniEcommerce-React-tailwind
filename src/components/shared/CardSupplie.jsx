@@ -1,7 +1,7 @@
 import { RiShoppingCart2Line } from 'react-icons/ri';
 import { useContext } from 'react';
 import { ProductsContext } from '../../context/ProductsContext';
-function CardSupplie({ image, title, available = '', price, supplie }) {
+function CardSupplie({ image, title, price, supplie }) {
 	const { OnAddProduct } = useContext(ProductsContext);
 
 	return (
@@ -12,13 +12,6 @@ function CardSupplie({ image, title, available = '', price, supplie }) {
 			/>
 			<p className='text-xl'>{title}</p>
 			<span className='text-gray-400'>S/{price}</span>
-			<p className='text-gray-600'>
-				{available === ''
-					? 'Not Available'
-					: available === 1
-					? `${available} Available`
-					: `${available} Availables`}
-			</p>
 			<button
 				type='button'
 				className=' bg-[#FFC93C] bottom-0   rounded-lg  py-2 px-4 mt-2 text-gray-700 flex items-center gap-2 hover:scale-105 hover:text-white'
